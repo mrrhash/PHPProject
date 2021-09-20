@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ColorController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
@@ -89,21 +89,21 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::delete('admin/deletesize/{id}',[SizeController::class, 'destroy' ]);
 
-    //Routes For Colors
+    //Routes For Employees
 
-    Route::get('admin/color',[ColorController::class,'index']);
+    Route::get('admin/employee',[EmployeeController::class,'index']);
 
-    Route::get('admin/addcolor',function(){ return view('Admin.addcolor'); });
+    Route::get('admin/addemployee',function(){ return view('Admin.addemployee'); });
 
-    Route::post('admin/storecolor',[ColorController::class,'store']);
+    Route::post('admin/storeemployee',[EmployeeController::class,'store']);
 
-    Route::get('admin/editcolor/{id}',[ColorController::class,'edit']);
+    Route::get('admin/editemployee/{id}',[EmployeeController::class,'edit']);
 
-    Route::put('admin/updatecolor/{id}',[ColorController::class,'update']);
+    Route::put('admin/updateemployee/{id}',[EmployeeController::class,'update']);
 
-    Route::get('admin/colorstatus/{status}/{id}',[ColorController::class, 'status' ]);
+    Route::get('admin/employeestatus/{status}/{id}',[EmployeeController::class, 'status' ]);
 
-    Route::delete('admin/deletecolor/{id}',[ColorController::class, 'destroy' ]);
+    Route::delete('admin/deleteemployee/{id}',[EmployeeController::class, 'destroy' ]);
 
     //Routes For Brands
 
@@ -123,7 +123,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     //Routes For Products
 
-    Route::get('admin/product',[ProductController::class,'index']);
+    Route::get('admin/products',[ProductController::class,'index']);
 
     Route::get('admin/addproduct', [ProductController::class,'create']);
 

@@ -1,7 +1,8 @@
 @extends('layout/master')
-@section('page_title','Product')
 @section('product_select','active')
+@section('page_title','Product')
 @section('content')
+
 
 <div class="jumbotron" style="margin-top: 100px;">
   <h1 class="display-3">Products</h1>
@@ -34,7 +35,7 @@
       <td >{{ $list->product_name }}</td>
       <td>
       @if($list->product_image!="")
-      <img width="50px" height="50px" src="{{ asset('storage/media/'.$list->product_image) }}">
+      <img width="100px" height="100px" src="{{ asset('storage/media/'.$list->product_image) }}">
       @else
       <h1>Image not Available</h1>
       @endif

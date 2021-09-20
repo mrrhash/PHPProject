@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,18 +52,51 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product'=>'required',
-            'product_slug'=>'required',
+            'category_id'=>'required',
+            'brand_id'=>'required',
+            'product_name'=>'required',
+            'product_slug'=>'required|unique:products,product_slug',
+            'product_image'=>'required|mimes:jpeg,jpg,png',
         ]);
-        $product = $request->post('product');
+       
+        
+
+        $category_id = $request->post('category_id');
+        $product_name = $request->post('product_name');
         $product_slug = $request->post('product_slug');
+        $brand_id = $request->post('brand_id');
+        $product_model = $request->post('product_model');
+        $product_shortdesc = $request->post('product_shortdesc');
+        $product_desc = $request->post('product_desc');
+        $product_keywords = $request->post('product_keywords');
+        $product_technical_spec = $request->post('product_technical_spec');
+        $product_uses = $request->post('product_uses');
+        $product_warranty = $request->post('product_warranty');
 
         $model = new Product();
 
-        $model->product=$product;
+        if($request->hasFile('product_image')){
+            $product_image = $request->file('product_image');
+            $extension = $product_image->extension();
+            $image_name = time().'.'.$extension;
+            $product_image->storeAs('/public/media',$image_name);
+            $model->product_image=$image_name;  
+        }
+       
+        $model->category_id=$category_id;
+        $model->product_name=$product_name;
         $model->product_slug=$product_slug;
+        $model->brand_id=$brand_id;
+        $model->product_model=$product_model;
+        $model->product_shortdesc=$product_shortdesc;
+        $model->product_desc=$product_desc;
+        $model->product_keywords=$product_keywords;
+        $model->product_technical_spec=$product_technical_spec;
+        $model->product_uses=$product_uses;
+        $model->product_warranty=$product_warranty;
         $model->status=1;
         $model->save();
+
         $request->session()->flash('msg',"Product Inserted");
         return redirect('admin/products');
     }
@@ -83,8 +117,30 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+
+        $result['category_name'] = DB::table('categories')->where(['status'=>1])->get();
+        //    echo "<pre>";
+        //  print_r($result['category_name']);
+        //     echo "</pre>";
+        //     die();
+    
+            $result['brand_name'] = DB::table('brands')->where(['status'=>1])->get();
+        //    echo "<pre>";
+        //  print_r($result['brand_name']);
+        //     echo "</pre>";
+        //     die();
+    
         $model=Product::find($id);
-        return view('Admin.editproduct')->with('data',$model);
+        //for selected category 
+        $data=$model->category_id;
+        $model2 = Category::find($data);
+        
+
+         //for selected brand 
+         $data2=$model->brand_id;
+         $model3 = Brand::find($data2);
+         
+        return view('Admin.editproduct',$result)->with('data',$model)->with('data2',$model2)->with('data3',$model3);
     }
 
     /**
@@ -97,19 +153,54 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'product'=>'required',
+            'category_id'=>'required',
+            'brand_id'=>'required',
+            'product_name'=>'required',
             'product_slug'=>'required',
+            'product_image'=>'required|mimes:jpeg,jpg,png',
         ]);
-        $product = $request->post('product');
+       
+        
+
+        $category_id = $request->post('category_id');
+        $product_name = $request->post('product_name');
         $product_slug = $request->post('product_slug');
+        $brand_id = $request->post('brand_id');
+        $product_model = $request->post('product_model');
+        $product_shortdesc = $request->post('product_shortdesc');
+        $product_desc = $request->post('product_desc');
+        $product_keywords = $request->post('product_keywords');
+        $product_technical_spec = $request->post('product_technical_spec');
+        $product_uses = $request->post('product_uses');
+        $product_warranty = $request->post('product_warranty');
 
-        $model=Product::find($id);
+        $model = Product::find($id);
 
-        $model->product=$product;
+        if($request->hasFile('product_image')){
+            $product_image = $request->file('product_image');
+            $extension = $product_image->extension();
+            $image_name = time().'.'.$extension;
+            $product_image->storeAs('/public/media',$image_name);
+            $model->product_image=$image_name;  
+        }
+       
+        $model->category_id=$category_id;
+        $model->product_name=$product_name;
         $model->product_slug=$product_slug;
+        $model->brand_id=$brand_id;
+        $model->product_model=$product_model;
+        $model->product_shortdesc=$product_shortdesc;
+        $model->product_desc=$product_desc;
+        $model->product_keywords=$product_keywords;
+        $model->product_technical_spec=$product_technical_spec;
+        $model->product_uses=$product_uses;
+        $model->product_warranty=$product_warranty;
+        $model->status=1;
         $model->save();
+
         $request->session()->flash('msg',"Product Updated");
         return redirect('admin/products');
+
     }
 
     /**
@@ -118,7 +209,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request,$id)
+    public function destroy(Request $request,$id)
     {
         $model = Product::find($id);
         $model->delete();
