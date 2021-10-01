@@ -13,12 +13,7 @@
         @error('category')
         <span class="text-danger">{{ $message }}</span>
         @enderror
-        <br><br>
-        <input type="text" class="form-control" placeholder="Category Slug..." name="category_slug">
-        @error('category_slug')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
-        <br><br>
+        <br><br>        
         <input type="submit" name="" id="" value="Add" class="btn btn-success btn-sm">
 
         <a href="categories" class="btn btn-secondary btn-sm text-white float-right">Back</a>

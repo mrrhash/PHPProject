@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Size;
+use App\Models\Delivery_type;
 use Illuminate\Http\Request;
 
-class SizeController extends Controller
+class DeliveryTypeController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $result['data']= Size::all();
-        return view('Admin.size',$result);
+        $result['data']= Delivery_Type::all();
+        return view('Admin.delivery_type',$result);
     }
 
     /**
@@ -37,23 +37,21 @@ class SizeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           
-            'size'=>'required|unique:sizes,size',
-           
+            
+            'name'=>'required|unique:delivery_types,name',
+            
 
         ]);
 
-        $size = $request->post('size');
-      
+        $name = $request->post('name');       
 
-        $model = new Size();
+        $model = new Delivery_Type();
 
-        $model->size=$size;        
-        $model->status=1;
+        $model->name=$name;      
         $model->save();
 
-        $request->session()->flash('msg','Size Inserted');
-        return redirect('admin/size');
+        $request->session()->flash('msg','Delivery_Type Inserted');
+        return redirect('admin/delivery_type');
     }
 
     /**
@@ -75,8 +73,8 @@ class SizeController extends Controller
      */
     public function edit($id)
     {
-        $model = Size::find($id);
-        return view('Admin.editsize')->with('data',$model);
+        $model = Delivery_Type::find($id);
+        return view('Admin.editdelivery_type')->with('data',$model);
     }
 
     /**
@@ -89,23 +87,21 @@ class SizeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            
-            'size'=>'required|unique:sizes,size',
-            
+            'name'=>'required|unique:delivery_types,name',
 
         ]);
 
-        $size = $request->post('size');
-       
-        $model = Size::find($id);
+        $name = $request->post('name');
+        
 
-        $model->size=$size;
-       
+        $model = Delivery_Type::find($id);
+
+        $model->name=$name;        
         
         $model->save();
 
-        $request->session()->flash('msg','Size Updated');
-        return redirect('admin/size');
+        $request->session()->flash('msg','Delivery_Type Updated');
+        return redirect('admin/delivery_type');
     }
 
     /**
@@ -116,18 +112,11 @@ class SizeController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $model = Size::find($id);
+        $model = Delivery_Type::find($id);
         $model->delete();
         
-        $request->session()->flash('msg',"Size Deleted!");
-        return redirect('admin/size');
+        $request->session()->flash('msg',"Delivery_Type Deleted!");
+        return redirect('admin/delivery_type');
     }
-    public function status(Request $request,$status,$id)
-    {
-        $model = Size::find($id);
-        $model->status=$status;
-        $model->save();
-        $request->session()->flash('msg',"Size Status Updated!");
-        return redirect('admin/size');
-    }
+  
 }

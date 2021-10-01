@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Payment_type;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class PaymentTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $result['data']=Category::all();
-        return view('Admin.category',$result);
+        $result['data']= Payment_Type::all();
+        return view('Admin.payment_type',$result);
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-
+        
     }
 
     /**
@@ -37,19 +37,21 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category'=>'required|unique:categories,category_name',            
+            
+            'name'=>'required|unique:payment_types,name',
+            
+
         ]);
-        $category = $request->post('category');
-      
 
-        $model = new Category();
+        $name = $request->post('name');       
 
-        $model->category_name=$category;
-       
-        $model->status=1;
+        $model = new Payment_Type();
+
+        $model->name=$name;      
         $model->save();
-        $request->session()->flash('msg',"Category Inserted");
-        return redirect('admin/categories');
+
+        $request->session()->flash('msg','Payment_Type Inserted');
+        return redirect('admin/payment_type');
     }
 
     /**
@@ -58,7 +60,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+    public function show($id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -68,8 +73,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $model=Category::find($id);
-        return view('Admin.editcategory')->with('data',$model);
+        $model = Payment_Type::find($id);
+        return view('Admin.editpayment_type')->with('data',$model);
     }
 
     /**
@@ -82,18 +87,21 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'category'=>'required|unique:categories,category_name,'.$id,
-            
+            'name'=>'required|unique:payment_types,name',
+
         ]);
-        $category = $request->post('category');
+
+        $name = $request->post('name');
         
 
-        $model=Category::find($id);
+        $model = Payment_Type::find($id);
 
-        $model->category_name=$category;        
+        $model->name=$name;        
+        
         $model->save();
-        $request->session()->flash('msg',"Category Updated");
-        return redirect('admin/categories');
+
+        $request->session()->flash('msg','Payment_Type Updated');
+        return redirect('admin/payment_type');
     }
 
     /**
@@ -102,19 +110,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request,$id)
+    public function destroy(Request $request,$id)
     {
-        $model = Category::find($id);
+        $model = Payment_Type::find($id);
         $model->delete();
-        $request->session()->flash('msg',"Category Deleted!");
-        return redirect('admin/categories');
+        
+        $request->session()->flash('msg',"Payment_Type Deleted!");
+        return redirect('admin/payment_type');
     }
-    public function status(Request $request,$status,$id)
-    {
-        $model=Category::find($id);
-        $model->status=$status;
-        $model->save();
-        $request->session()->flash('msg',"Category Status Updated!");
-        return redirect('admin/categories');
-    }
+  
 }

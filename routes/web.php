@@ -3,11 +3,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\CouponController;
-use App\Http\Controllers\BrandController;
+use App\Http\Controllers\PaymentTypeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SizeController;
+use App\Http\Controllers\DeliveryTypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,37 +58,33 @@ Route::group(['middleware'=>'admin_auth'],function(){
             return redirect('login');
     });
 
-    //Routes For Coupons
+    //Routes For Payment Types
 
-    Route::get('admin/coupon',[CouponController::class,'index']);
+    Route::get('admin/payment_type',[PaymentTypeController::class,'index']);
 
-    Route::get('admin/addcoupon',function(){ return view('Admin.addcoupon'); });
+    Route::get('admin/addpayment_type',function(){ return view('Admin.addpayment_type'); });
 
-    Route::post('admin/storecoupon',[CouponController::class,'store']);
+    Route::post('admin/storepayment_type',[PaymentTypeController::class,'store']);
 
-    Route::get('admin/editcoupon/{id}',[CouponController::class,'edit']);
+    Route::get('admin/editpayment_type/{id}',[PaymentTypeController::class,'edit']);
 
-    Route::put('admin/updatecoupon/{id}',[CouponController::class,'update']);
+    Route::put('admin/updatepayment_type/{id}',[PaymentTypeController::class,'update']);
+    
+    Route::delete('admin/deletepayment_type/{id}',[PaymentTypeController::class, 'destroy' ]);
 
-    Route::get('admin/couponstatus/{status}/{id}',[CouponController::class, 'status' ]);
+    //Routes For Delivery Types
 
-    Route::delete('admin/deletecoupon/{id}',[CouponController::class, 'destroy' ]);
+    Route::get('admin/delivery_type',[DeliveryTypeController::class,'index']);
 
-    //Routes For Sizes
+    Route::get('admin/adddelivery_type',function(){ return view('Admin.adddelivery_type'); });
 
-    Route::get('admin/size',[SizeController::class,'index']);
+    Route::post('admin/storedelivery_type',[DeliveryTypeController::class,'store']);
 
-    Route::get('admin/addsize',function(){ return view('Admin.addsize'); });
+    Route::get('admin/editdelivery_type/{id}',[DeliveryTypeController::class,'edit']);
 
-    Route::post('admin/storesize',[SizeController::class,'store']);
+    Route::put('admin/updatedelivery_type/{id}',[DeliveryTypeController::class,'update']);   
 
-    Route::get('admin/editsize/{id}',[SizeController::class,'edit']);
-
-    Route::put('admin/updatesize/{id}',[SizeController::class,'update']);
-
-    Route::get('admin/sizestatus/{status}/{id}',[SizeController::class, 'status' ]);
-
-    Route::delete('admin/deletesize/{id}',[SizeController::class, 'destroy' ]);
+    Route::delete('admin/deletedelivery_type/{id}',[DeliveryTypeController::class, 'destroy' ]);
 
     //Routes For Employees
 
@@ -105,21 +102,15 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::delete('admin/deleteemployee/{id}',[EmployeeController::class, 'destroy' ]);
 
-    //Routes For Brands
+    //Routes For Orders
 
-    Route::get('admin/brand',[BrandController::class,'index']);
+    Route::get('admin/order',[OrderController::class,'index']);   
 
-    Route::get('admin/addbrand',function(){ return view('Admin.addbrand'); });
+    Route::get('admin/orderdetails/{id}',[OrderController::class,'details']);   
 
-    Route::post('admin/storebrand',[BrandController::class,'store']);
+    Route::get('admin/orderstatus/{status}/{id}',[OrderController::class, 'status' ]);
 
-    Route::get('admin/editbrand/{id}',[BrandController::class,'edit']);
-
-    Route::put('admin/updatebrand/{id}',[BrandController::class,'update']);
-
-    Route::get('admin/brandstatus/{status}/{id}',[BrandController::class, 'status' ]);
-
-    Route::delete('admin/deletebrand/{id}',[BrandController::class, 'destroy' ]);
+    Route::delete('admin/deleteorder/{id}',[OrderController::class, 'destroy' ]);
 
     //Routes For Products
 
@@ -131,9 +122,11 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::get('admin/editproduct/{id}',[ProductController::class,'edit']);
 
-    Route::put('admin/updateproduct/{id}',[ProductController::class,'update']);
-
-    Route::get('admin/productstatus/{status}/{id}',[ProductController::class, 'status' ]);
+    Route::put('admin/updateproduct/{id}',[ProductController::class,'update']);   
 
     Route::delete('admin/deleteproduct/{id}',[ProductController::class, 'destroy' ]);
+
+     //Routes For Users
+
+     Route::get('admin/users',[UserController::class,'index']);
 });

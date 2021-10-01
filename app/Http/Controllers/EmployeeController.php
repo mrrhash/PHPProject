@@ -41,8 +41,11 @@ class EmployeeController extends Controller
             'fname'=>'required',
             'lname'=>'required',
             'gmail'=>'required',
+            'username'=>'required|unique:employees,username',
+            'password'=>'required',
             'city'=>'required',
-            'state'=>'required',
+            'region'=>'required',
+            'contact'=>'required',
             'address'=>'required',
             'jobtitle'=>'required',
            
@@ -52,9 +55,12 @@ class EmployeeController extends Controller
         $fname = $request->post('fname');
         $lname = $request->post('lname');
         $gmail = $request->post('gmail');
+        $username = $request->post('username');
+        $password = $request->post('password');
+        $contact = $request->post('contact');
         $city = $request->post('city');
         $address = $request->post('address');
-        $state = $request->post('state');
+        $region = $request->post('region');
         $jobtitle = $request->post('jobtitle');
       
 
@@ -63,9 +69,12 @@ class EmployeeController extends Controller
         $model->fname=$fname;   
         $model->lname=$lname;     
         $model->gmail=$gmail;
+        $model->username=$username;
+        $model->password=$password;
+        $model->contact=$contact;
         $model->city=$city;
-        $model->adress=$address;
-        $model->state=$state;
+        $model->address=$address;
+        $model->region=$region;
         $model->jobtitle=$jobtitle;
        
         $model->save();
@@ -111,8 +120,11 @@ class EmployeeController extends Controller
             'fname'=>'required',
             'lname'=>'required',
             'gmail'=>'required',
+            'username'=>'required|unique:employees,username,'.$id,
+            'password'=>'required',
             'city'=>'required',
-            'state'=>'required',
+            'region'=>'required',
+            'contact'=>'required',
             'address'=>'required',
             'jobtitle'=>'required',
 
@@ -121,9 +133,12 @@ class EmployeeController extends Controller
         $fname = $request->post('fname');
         $lname = $request->post('lname');
         $gmail = $request->post('gmail');
+        $username = $request->post('username');
+        $password = $request->post('password');
+        $contact = $request->post('contact');
         $city = $request->post('city');
         $address = $request->post('address');
-        $state = $request->post('state');
+        $region = $request->post('region');
         $jobtitle = $request->post('jobtitle');
        
         $model = Employee::find($id);
@@ -132,9 +147,12 @@ class EmployeeController extends Controller
         $model->fname=$fname;   
         $model->lname=$lname;     
         $model->gmail=$gmail;
+        $model->username=$username;
+        $model->password=$password;
+        $model->contact=$contact;
         $model->city=$city;
-        $model->adress=$address;
-        $model->state=$state;
+        $model->address=$address;
+        $model->region=$region;
         $model->jobtitle=$jobtitle;
        
         

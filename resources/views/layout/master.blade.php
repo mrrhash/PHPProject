@@ -58,22 +58,28 @@
               <p>Employees</p>
             </a>
           </li>
-          <li class="nav-item @yield('coupon_select')">
-            <a class="nav-link " href="{{ url('admin/coupon') }}">
+          <li class="nav-item @yield('user_select')">
+            <a class="nav-link" href="{{ url('admin/users') }}">
+              <i class="material-icons">bubble_chart</i>
+              <p>Users</p>
+            </a>
+          </li>
+          <li class="nav-item @yield('order_select')">
+            <a class="nav-link " href="{{ url('admin/order') }}">
               <i class="material-icons">content_paste</i>
-              <p>Coupons</p>
+              <p>Orders</p>
             </a>
           </li>
-          <li class="nav-item @yield('size_select')">
-            <a class="nav-link" href="{{ url('admin/size') }}">
+          <li class="nav-item @yield('delivery_type_select')">
+            <a class="nav-link" href="{{ url('admin/delivery_type') }}">
               <i class="material-icons">location_ons</i>
-              <p>Sizes</p>
+              <p>Delivery Types</p>
             </a>
           </li>
-          <li class="nav-item @yield('brand_select')">
-            <a class="nav-link" href="{{ url('admin/brand') }}">
+          <li class="nav-item @yield('payment_type_select')">
+            <a class="nav-link" href="{{ url('admin/payment_type') }}">
              <i class="fas fa-shopping-cart "></i>
-              <p>Brands</p>
+              <p>Payments Types</p>
             </a>
           </li>
           <!-- <li class="nav-item active-pro ">

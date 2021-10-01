@@ -18,11 +18,13 @@ class CreateEmployeesTable extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('gmail');
+            $table->string('username');
+            $table->string('password');
             $table->string('city');
-            $table->string('state');
-            $table->string('adress');
-            $table->string('jobtitle');
-                     
+            $table->string('region');
+            $table->string('contact');
+            $table->string('address');
+            $table->string('jobtitle');                     
             $table->timestamps();
         });
     }

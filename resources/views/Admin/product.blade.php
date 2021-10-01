@@ -18,35 +18,40 @@
     <strong>Success!</strong> {{ session('msg') }}
   </div>
   @endif
+  <div class="table-responsive">
 <table class="table table-striped table-secondary" >
   <thead>
     <tr class="">
-      <th class="font-weight-bold" scope="col">ID</th>
+     
+      <th class="font-weight-bold" scope="col">Product Code</th>
+      <th class="font-weight-bold" scope="col">Product Number</th>
+      <th class="font-weight-bold" scope="col">Product ID</th>
       <th class="font-weight-bold" scope="col">Product Name</th>
+      <th class="font-weight-bold" scope="col">Category Name</th>
       <th class="font-weight-bold" scope="col">Product Image</th>
-      <th class="font-weight-bold" scope="col">Status</th>
+      <th class="font-weight-bold" scope="col">Quantity</th>
+      <th class="font-weight-bold" scope="col">Price</th>     
       <th class="font-weight-bold" scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
   @foreach($data as $list)
     <tr>
-      <th scope="row">{{ $list->id }}</th>
+     
+      <td >{{ $list->product_code }}</td>
+      <td >{{ $list->product_number }}</td>
+      <td >{{ $list->product_ID }}</td>
       <td >{{ $list->product_name }}</td>
+      <td >{{ $list->category_id }}</td>
       <td>
-      @if($list->product_image!="")
-      <img width="100px" height="100px" src="{{ asset('storage/media/'.$list->product_image) }}">
+      @if($list->image!="")
+      <img width="100px" height="100px" src="{{ asset('storage/media/'.$list->image) }}">
       @else
       <h1>Image not Available</h1>
       @endif
       </td>
-      <td> 
-       @if($list->status==1)
-      <a href="{{ url('admin/productstatus/0') }}/{{$list->id}}" class="btn btn-sm btn-warning">Active</a>
-      @else
-      <a href="{{ url('admin/productstatus/1') }}/{{$list->id}}" class="btn btn-sm btn-info">Deactive</a>
-      @endif
-      </td>
+      <td >{{ $list->stock }}</td>
+      <td >{{ $list->price }}</td>
 
       <td>
         <a href="{{ url('admin/editproduct')}}/{{$list->id}}" class="btn btn-sm btn-success">Edit</a>
@@ -63,6 +68,7 @@
    @endforeach
   </tbody>
 </table>
+  </div>
 </div>
 <script>
   function confirmdelete(){

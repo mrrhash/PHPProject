@@ -17,15 +17,18 @@
     <strong>Success!</strong> {{ session('msg') }}
   </div>
   @endif
+  <div class="table-responsive">
 <table class="table table-striped table-secondary" >
   <thead>
     <tr class="">
       <th class="font-weight-bold" scope="col">ID</th>
-      <th class="font-weight-bold" scope="col">Employee Name</th>    
+      <th class="font-weight-bold" scope="col">Name</th>     
       <th class="font-weight-bold" scope="col">Gmail</th>   
-      <th class="font-weight-bold" scope="col">DateHired</th> 
+      <th class="font-weight-bold" scope="col">Username</th> 
+      <th class="font-weight-bold" scope="col">Password</th>
       <th class="font-weight-bold" scope="col">City</th> 
-      <th class="font-weight-bold" scope="col">State</th> 
+      <th class="font-weight-bold" scope="col">Region</th> 
+      <th class="font-weight-bold" scope="col">Contact</th>
       <th class="font-weight-bold" scope="col">Address</th>
       <th class="font-weight-bold" scope="col">Job Title</th>
       <th class="font-weight-bold" scope="col">Action</th>
@@ -37,10 +40,12 @@
       <th scope="row">{{ $list->id }}</th>
       <td >  {{ $list->fname }} {{ $list->lname }}</td>
       <td >  {{ $list->gmail }}</td>
-      <td >  {{ $list->created_at }}</td>      
+      <td >  {{ $list->username }}</td>    
+      <td >  {{ $list->password }}</td>    
       <td >  {{ $list->city }}</td> 
-      <td >  {{ $list->state }}</td> 
-      <td >  {{ $list->adress }}</td> 
+      <td >  {{ $list->region }}</td>
+      <td >  {{ $list->contact }}</td>   
+      <td >  {{ $list->address }}</td> 
       <td >  {{ $list->jobtitle }}</td> 
       
       <td>
@@ -59,6 +64,7 @@
    @endforeach
   </tbody>
 </table>
+  </div>
 </div>
 <script>
   function confirmdelete(){

@@ -10,16 +10,11 @@
     <form action="{{ url('admin/updatecategory') }}/{{ $data->id }}" class="col-6" method="post">
         @csrf
         @method('put')
-        <input type="text" value="{{ $data->category }}" class="form-control" placeholder="Category Name..." name="category">
+        <input type="text" value="{{ $data->category_name }}" class="form-control" placeholder="Category Name..." name="category">
         @error('category')
         <span class="text-danger">{{ $message }}</span>
         @enderror
-        <br><br>
-        <input type="text" value="{{  $data->category_slug }}" class="form-control" placeholder="Category Slug..." name="category_slug">
-        @error('category_slug')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
-        <br><br>
+        <br><br>       
         <input type="submit" name="" id="" value="Update" class="btn btn-success btn-sm">
 
         <a href="{{url('admin/categories')}}" class="btn btn-secondary btn-sm text-white float-right">Back</a>

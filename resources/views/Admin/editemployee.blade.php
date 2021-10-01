@@ -26,18 +26,33 @@
         <span class="text-danger">{{ $message }}</span>
         @enderror
         <br><br>
+        <input type="text"  value="{{ $data->username }}" class="form-control" placeholder="Username..." name="username">
+        @error('username')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+        <br><br>
+        <input type="text"  value="{{ $data->password }}" class="form-control" placeholder="Password..." name="password">
+        @error('password')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+        <br><br>
         <input type="text"  value="{{ $data->city }}" class="form-control" placeholder="City..." name="city">
         @error('city')
         <span class="text-danger">{{ $message }}</span>
         @enderror
         <br><br>
-        <input type="text"  value="{{ $data->state }}" class="form-control" placeholder="State..." name="state">
-        @error('state')
+        <input type="text"  value="{{ $data->region }}" class="form-control" placeholder="Region..." name="region">
+        @error('region')
         <span class="text-danger">{{ $message }}</span>
         @enderror
         <br><br>
-        <input type="text"  value="{{ $data->adress }}" class="form-control" placeholder="Address..." name="address">
+        <input type="text"  value="{{ $data->address }}" class="form-control" placeholder="Address..." name="address">
         @error('address')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+        <br><br>
+        <input type="text"  value="{{ $data->contact }}" class="form-control" placeholder="Contact..." name="contact">
+        @error('contact')
         <span class="text-danger">{{ $message }}</span>
         @enderror
         <br><br>
